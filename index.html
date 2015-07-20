@@ -85,8 +85,8 @@
       /* Mixpanel query function */
       var runQuery = function() {
         
-        /* Get DAU and MAU */
-        var $dau = MP.api.segment(eventName, {
+        /* Graph 1 data query */
+        var $iphoneViewProduct = MP.api.segment("Button Clicked", {
               from: moment().subtract(30, 'days'),
               to: moment().subtract(1, 'days'),
               unit: 'day',
@@ -105,7 +105,7 @@
           type: 'unique'
         });
 
-        /* Create graphs for DAU and DAU/MAU */
+        /* Graph 1 build */
         $.when($dau, $mau, $mauForGraph).done(function(dau, mau, mauForGraph) {
           // average the DAU values and divide them by the MAU ones
           // (we sum the MAU in the case where the 30 days spans over two months)
