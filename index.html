@@ -110,8 +110,9 @@
           var graphObj = {};
           graphObj['Daily Average'] = {};
           for(key in iphoneViewProduct.values()['Button Clicked']){
-            console.log(key);
+            graphObj['Daily Average'].key = (iphoneViewProduct.values()['Button Clicked'][key]+iphoneViewListing.values()['Application Opened'][key])/7;
           }
+          console.log(graphObj);
         });
         
         /* Get number of new users per day */
