@@ -94,7 +94,8 @@
               type: 'unique',
               'where': 'properties["$os"] == iPhone OS'
             });
-        console.log($iphoneViewProduct.results());
+        print("hey - "+$iphoneViewProduct);
+        console.log($iphoneViewProduct);
         var $mau = MP.api.segment(eventName, {
           from: moment().subtract(30, 'days'),
           to: moment().subtract(1, 'days'),
@@ -109,7 +110,7 @@
         });
 
         /* Graph 1 build */
-        $.when($iphoneViewProduct, $mau, $mauForGraph).done(function(dau, mau, mauForGraph) {
+        $.when($dau, $mau, $mauForGraph).done(function(dau, mau, mauForGraph) {
           // average the DAU values and divide them by the MAU ones
           // (we sum the MAU in the case where the 30 days spans over two months)
           
