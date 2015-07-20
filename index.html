@@ -89,7 +89,7 @@
         /* Graph 1 data query */
         var $iphoneViewProduct = MP.api.segment("Button Clicked", {
               from: startDate,
-              to: moment().subtract(1, 'days'),
+              to: moment(),
               unit: 'week',
               type: 'unique',
               'where': 'properties["$os"] == "iPhone OS"'
