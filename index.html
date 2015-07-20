@@ -88,10 +88,11 @@
       var runQuery = function() {
         /* Graph 1 data query */
         var $iphoneViewProduct = MP.api.segment("Button Clicked", {
-              from: moment().subtract(30, 'days'),
+              from: startDate,
               to: moment().subtract(1, 'days'),
               unit: 'week',
-              type: 'unique'
+              type: 'unique',
+              'where': 'properties["$os"] == iPhone OS'
             });
         var $mau = MP.api.segment(eventName, {
           from: moment().subtract(30, 'days'),
