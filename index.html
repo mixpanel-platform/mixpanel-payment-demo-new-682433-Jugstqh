@@ -109,15 +109,10 @@
         });
 
         /* Graph 1 build */
-        $.when($dau, $mau, $mauForGraph).done(function(dau, mau, mauForGraph) {
+        $.when($iphoneViewProduct, $mau, $mauForGraph).done(function(dau, mau, mauForGraph) {
           // average the DAU values and divide them by the MAU ones
           // (we sum the MAU in the case where the 30 days spans over two months)
-          var dauMau = dau.divide(mau.sum()).values();
-          // Set graphs for DAU, MAU and DAU/MAU
-                    console.log(dau.values());
-          dauGraph.MPChart('setData', dau);
-          mauGraph.MPChart('setData', mauForGraph);
-          mauDauGraph.MPChart('setData', dauMau);
+          
         });
         
         /* Get number of new users per day */
