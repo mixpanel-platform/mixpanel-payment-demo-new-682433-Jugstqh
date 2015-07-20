@@ -84,12 +84,13 @@
       
       /* Mixpanel query function */
       var runQuery = function() {
+        alert(moment().subtract(1, 'days'));
         
         /* Graph 1 data query */
         var $iphoneViewProduct = MP.api.segment("Button Clicked", {
               from: moment().subtract(30, 'days'),
               to: moment().subtract(1, 'days'),
-              unit: 'day',
+              unit: 'week',
               type: 'unique'
             });
         var $mau = MP.api.segment(eventName, {
