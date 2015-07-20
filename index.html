@@ -29,12 +29,10 @@
       <div id="dateSelect" style="float: right;"></div>
       <div style="clear: both;"></div>
       
-      
       <h1>1. Average Daily Users (per week)</h1><br clear="all" /><br clear="all" />
       <div id="graphOne"></div><br clear="all" />
       
       <br clear="all" /><hr /><br clear="all" /><br clear="all" />
-      
       
     </div>
     
@@ -61,6 +59,7 @@
       var runQuery = function() {
         
         /* Graph 1: Average mobile daily users per week TODO: change event names*/
+        // Query all unique users who viewed product in a week TODO: need to do this daily and sum for week
         var $iphoneViewProduct = MP.api.segment("Button Clicked", {
               from: startDate,
               to: moment(),
@@ -68,6 +67,7 @@
               type: 'unique',
               'where': 'properties["$os"] == "iPhone OS"'
         });
+        // Query all unique users who viewed listing 
         var $iphoneViewListing = MP.api.segment("Application Opened", {
           from: startDate,
           to: moment(),
@@ -82,10 +82,12 @@
           var graphObj = {};
           graphObj['Daily Average'] = {};
           for(key in iphoneViewProduct.values()['Button Clicked']){
-            graphObj['Daily Average'][key] = (iphoneViewProduct.values()['Button Clicked'][key]+iphoneViewListing.values()['Application Opened'][key])/7;
+            graphObj['Daily Average'][key] = (iphoneViewProduct.values()['Button Clicked'][key]+iphoneViewListing.values()['Application Opened'][key]);
           }
           graphOne.MPChart('setData', graphObj);
         });
+        /* End of Graph 1 build */
+        
       };
     /* End query */
     
