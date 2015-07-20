@@ -86,6 +86,7 @@
       
       /* Mixpanel query function */
       var runQuery = function() {
+        
         /* Graph 1 data query */
         var $iphoneViewProduct = MP.api.segment("Button Clicked", {
               from: startDate,
@@ -93,10 +94,8 @@
               unit: 'week',
               type: 'unique',
               'where': 'properties["$os"] == "iPhone OS"'
-            });
-        print("hey - "+$iphoneViewProduct);
-        console.log($iphoneViewProduct);
-        var $mau = MP.api.segment(eventName, {
+        });
+        var $iphoneViewListing = MP.api.segment("Application Opened", {
           from: moment().subtract(30, 'days'),
           to: moment().subtract(1, 'days'),
           unit: 'month',
