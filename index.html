@@ -105,15 +105,11 @@
 
         /* Graph 1 build */
         $.when($iphoneViewProduct, $iphoneViewListing).done(function(iphoneViewProduct, iphoneViewListing) {
-          console.log(iphoneViewProduct.values());
+          console.log(iphoneViewProduct.values()['Button Clicked']);
           console.log(iphoneViewListing.values());
           var graphObj = {};
           graphObj['Daily Average'] = {};
-          for (var key in iphoneViewProduct['Button Clicked'].values()) {
-            //graphObj['Daily Average'][key] = iphoneViewProduct['Button Clicked'][key] + iphoneViewListing['Application Opened'][key];
-            console.log(key);
-          }
-          console.log(graphObj);
+
         });
         
         /* Get number of new users per day */
