@@ -108,8 +108,9 @@
           console.log(iphoneViewProduct.values());
           console.log(iphoneViewListing.values());
           var graphObj = {};
+          graphObj['Daily Average'];
           for (var key in iphoneViewProduct) {
-            graphObj[key] = iphoneViewProduct[key] + iphoneViewListing[key];
+            graphObj['Daily Average'][key] = iphoneViewProduct[key] + iphoneViewListing[key];
           }
           console.log(graphObj.values());
         });
