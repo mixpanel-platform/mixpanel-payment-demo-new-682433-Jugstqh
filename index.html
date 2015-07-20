@@ -96,23 +96,17 @@
               'where': 'properties["$os"] == "iPhone OS"'
         });
         var $iphoneViewListing = MP.api.segment("Application Opened", {
-          from: moment().subtract(30, 'days'),
-          to: moment().subtract(1, 'days'),
-          unit: 'month',
-          type: 'unique'
-        });
-        var $mauForGraph = MP.api.segment(eventName, {
-          from: moment().subtract(3, 'months'),
-          to: moment().subtract(1, 'days'),
-          unit: 'month',
-          type: 'unique'
+          from: startDate,
+          to: moment(),
+          unit: 'week',
+          type: 'unique',
+          'where': 'properties["$os"] == "iPhone OS"'
         });
 
         /* Graph 1 build */
-        $.when($iphoneViewProduct, $mau, $mauForGraph).done(function(ivp, mau, mauForGraph) {
-          console.log(ivp.values());
-          // average the DAU values and divide them by the MAU ones
-          // (we sum the MAU in the case where the 30 days spans over two months)
+        $.when($iphoneViewProduct, $iphoneViewListing, ).done(function(iphoneViewProduct, iphoneViewListing) {
+          console.log(iphoneViewReport);
+          console.log(iphoneViewListing);
           
         });
         
