@@ -62,6 +62,8 @@
     
       /* Set some variables */
       var graphOne = $('#graphOne').MPChart({chartType: 'line'});
+      var startDate = new Date('December 29, 2014');
+      
       var mauGraph = $('#mauGraph').MPChart({chartType:'line'});
       var newUserGraph = $('#newUserGraph').MPChart({chartType:'line'});
       var iosEventsBarGraph = $('#iosEventsBarGraph').MPChart({chartType:'bar'});
@@ -84,7 +86,6 @@
       
       /* Mixpanel query function */
       var runQuery = function() {
-        alert(new Date('December 29, 2014'));
         /* Graph 1 data query */
         var $iphoneViewProduct = MP.api.segment("Button Clicked", {
               from: moment().subtract(30, 'days'),
