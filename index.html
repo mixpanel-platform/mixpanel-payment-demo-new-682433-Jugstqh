@@ -105,8 +105,13 @@
 
         /* Graph 1 build */
         $.when($iphoneViewProduct, $iphoneViewListing).done(function(iphoneViewProduct, iphoneViewListing) {
-          console.log(iphoneViewProduct.sum());
+          console.log(iphoneViewProduct.values());
           console.log(iphoneViewListing.values());
+          for (var key in p) {
+            if (p.hasOwnProperty(key)) {
+              
+            }
+          }
           
         });
         
