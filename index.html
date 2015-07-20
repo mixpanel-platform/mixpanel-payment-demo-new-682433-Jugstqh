@@ -92,7 +92,7 @@
               to: moment().subtract(1, 'days'),
               unit: 'week',
               type: 'unique',
-              'where': 'properties["$os"] == iPhone OS'
+              'where': 'properties["$os"] == "iPhone OS"'
             });
         print("hey - "+$iphoneViewProduct);
         console.log($iphoneViewProduct);
