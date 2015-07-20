@@ -64,18 +64,7 @@
       var graphOne = $('#graphOne').MPChart({chartType: 'line'});
       var startDate = new Date('December 29, 2014');
       
-      var mauGraph = $('#mauGraph').MPChart({chartType:'line'});
-      var newUserGraph = $('#newUserGraph').MPChart({chartType:'line'});
-      var iosEventsBarGraph = $('#iosEventsBarGraph').MPChart({chartType:'bar'});
-      var iosEventsPieChart = $('#iosEventsPieChart').MPChart({chartType:'pie'});
-      var androidEventsBarGraph = $('#androidEventsBarGraph').MPChart({chartType:'bar'});
-      var androidEventsPieChart = $('#androidEventsPieChart').MPChart({chartType:'pie'});
-      var chatsByDeviceGraph = $('#chatsByDeviceGraph').MPChart({chartType:'line'});
-      var eventName = "Create Account"; // Event that defines "active user"
-      var newUserEvent = "Create Account"; // New user event
-      var chatEvent = "Add Friends"; // Chat event
-      
-      /* Get object size */
+      /* Helper function: Get object size */
       Object.size = function(obj) {
         var size = 0, key;
         for (key in obj) {
@@ -84,10 +73,10 @@
         return size;
       };
       
-      /* Mixpanel query function */
+      /* ** Main Mixpanel query function ** */
       var runQuery = function() {
         
-        /* Graph 1 data query */
+        /* Graph 1: Average mobile daily users per week TODO: change event names*/
         var $iphoneViewProduct = MP.api.segment("Button Clicked", {
               from: startDate,
               to: moment(),
@@ -102,7 +91,6 @@
           type: 'unique',
           'where': 'properties["$os"] == "iPhone OS"'
         });
-
         /* Graph 1 build */
         $.when($iphoneViewProduct, $iphoneViewListing).done(function(iphoneViewProduct, iphoneViewListing) {
           console.log(iphoneViewProduct.values()['Button Clicked']);
@@ -114,59 +102,6 @@
           }
           graphOne.MPChart('setData', graphObj);
         });
-        
-        /* Get number of new users per day */
-        MP.api.segment(newUserEvent,{from:moment().subtract(30,'days'),to:moment().subtract(1,'days'),unit:'day',type:'unique'}).done(function(results){
-          newUserGraph.MPChart('setData', results);
-        });
-        
-        /* Get top events */
-        var $topEvents = MP.api.topEvents({from: moment().subtract(30,'days'),to:moment().subtract(1,'days'), limit: 7});
-        $.when($topEvents).done(function(topEvents){
-          var eventCount = Object.size(topEvents.values()); // Should always be 7
-          
-          /* Build charts for iOS top events */
-          var eventsList = [];
-          var params = {
-            from: moment().subtract(30,'days'),
-            to: moment().subtract(1,'days'),
-            'where': 'properties["Operating System"] == "IOS"'
-          }
-          // For each iOS top event, gsum up event counts for last month and build graphs
-          for(key in topEvents.values()) {
-            MP.api.events(topEvents.values()[key], params).done(function(results) {
-              eventsList.push(results.values());
-              if(eventsList.length == eventCount){
-                buildChartFromArray(eventsList, iosEventsBarGraph);
-                buildChartFromArray(eventsList,iosEventsPieChart);
-              }
-            });
-          }
-          
-          /* Build charts for Android top events */
-          var params = {
-            from: moment().subtract(30,'days'),
-            to: moment().subtract(1,'days'),
-            'where': 'properties["Operating System"] == "Android"'
-          }
-          var eventsList2 = [];
-          // For each Android top event, sum up event counts for last month and build graphs
-          for(key in topEvents.values()) {
-            MP.api.events(topEvents.values()[key], params).done(function(results) {
-              eventsList2.push(results.values());
-              if(eventsList2.length == eventCount){
-                buildChartFromArray(eventsList2, androidEventsBarGraph);
-                buildChartFromArray(eventsList2,androidEventsPieChart);
-              }
-            });
-          }
-        });
-        
-        /* Chats by Operating System */
-        MP.api.segment(chatEvent, 'Operating System', {from: moment().subtract(30, 'days'), to:moment().subtract(1,'days'), unit: 'day'}).done(function(results) {
-          chatsByDeviceGraph.MPChart('setData',results);
-        });
-        
       };
     /* End query */
     
