@@ -74,7 +74,7 @@
               type: 'unique',
               'where': 'properties["$os"] == "iPhone OS"'
         });
-        console.log($iphoneViewProductDay.values());
+        console.log($iphoneViewProductDay);
         // Query all unique users who viewed listing 
         var $iphoneViewListing = MP.api.segment("Application Opened", {
           from: startDate,
