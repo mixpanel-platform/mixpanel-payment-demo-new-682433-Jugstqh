@@ -107,12 +107,11 @@
         $.when($iphoneViewProduct, $iphoneViewListing).done(function(iphoneViewProduct, iphoneViewListing) {
           console.log(iphoneViewProduct.values());
           console.log(iphoneViewListing.values());
-          for (var key in p) {
-            if (p.hasOwnProperty(key)) {
-              
-            }
+          var graphObj = {};
+          for (var key in iphoneViewProduct) {
+            graphObj[key] = iphoneViewProduct[key] + iphoneViewListing[key];
           }
-          
+          console.log(graphObj);
         });
         
         /* Get number of new users per day */
