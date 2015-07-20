@@ -74,7 +74,6 @@
               type: 'unique',
               'where': 'properties["$os"] == "iPhone OS"'
         });
-        console.log($iphoneViewProductDay);
         // Query all unique users who viewed listing 
         var $iphoneViewListing = MP.api.segment("Application Opened", {
           from: startDate,
@@ -86,7 +85,7 @@
         /* Graph 1 build */
         $.when($iphoneViewProduct, $iphoneViewListing, $iphoneViewProductDay).done(function(iphoneViewProduct, iphoneViewListing, iphoneViewProductDay) {
           var graphObj = {};
-          for(day in iphoneViewProductDay['Button Clicked']){
+          for(day in iphoneViewProductDay.values()['Button Clicked']){
             console.log(day);
           }
           graphObj['Daily Average'] = {};
