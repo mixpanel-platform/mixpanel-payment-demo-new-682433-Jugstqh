@@ -94,6 +94,7 @@
               type: 'unique',
               'where': 'properties["$os"] == iPhone OS'
             });
+        console.log($iphoneViewProduct);
         var $mau = MP.api.segment(eventName, {
           from: moment().subtract(30, 'days'),
           to: moment().subtract(1, 'days'),
