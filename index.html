@@ -75,10 +75,10 @@
               'where': 'properties["$os"] == "iPhone OS"'
         });
         // Query all unique users who viewed listing 
-        var $iphoneViewListing = MP.api.segment("Application Opened", {
+        var $iphoneViewListingDay = MP.api.segment("Application Opened", {
           from: startDate,
           to: moment(),
-          unit: 'week',
+          unit: 'day',
           type: 'unique',
           'where': 'properties["$os"] == "iPhone OS"'
         });
@@ -90,7 +90,6 @@
             dayList.push(day);// DEBUGS, LEGT OFF HERE
           }
           dayList.sort();
-          console.log(dayList);
           graphObj['Daily Average'] = {};
           for(key in iphoneViewProduct.values()['Button Clicked']){
             graphObj['Daily Average'][key] = (iphoneViewProduct.values()['Button Clicked'][key]+iphoneViewListing.values()['Application Opened'][key]);
