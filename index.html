@@ -85,15 +85,15 @@
         /* Graph 1 build */
         $.when($iphoneViewProduct, $iphoneViewListingDay, $iphoneViewProductDay).done(function(iphoneViewProduct, iphoneViewListingDay, iphoneViewProductDay) {
           var graphObj = {};
-          var dayList = [];
-          for(day in iphoneViewProduct.values()['Button Clicked']){
-            dayList.push(day);
+          var weekList = [];
+          for(week in iphoneViewProduct.values()['Button Clicked']){
+            weekList.push(week);
           }
           dayList.sort();
           graphObj['Daily Average'] = {};
-          console.log(dayList);
-          for(key in iphoneViewProduct.values()['Button Clicked']){
-            graphObj['Daily Average'][key] = (iphoneViewProduct.values()['Button Clicked'][key]+iphoneViewListing.values()['Application Opened'][key]);
+          for(var i = 0; i < dayList.length; i++){
+            console.log(dayList[i]);
+            //graphObj['Daily Average'][key] = (iphoneViewProduct.values()['Button Clicked'][key]+iphoneViewListing.values()['Application Opened'][key]);
           }
           graphOne.MPChart('setData', graphObj);
         });
