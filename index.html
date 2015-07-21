@@ -89,10 +89,10 @@
           for(week in iphoneViewProduct.values()['Button Clicked']){
             weekList.push(week);
           }
-          dayList.sort();
+          weekList.sort();
           graphObj['Daily Average'] = {};
-          for(var i = 0; i < dayList.length; i++){
-            console.log(dayList[i]);
+          for(var i = 0; i < weekList.length; i++){
+            console.log(weekList[i]);
             //graphObj['Daily Average'][key] = (iphoneViewProduct.values()['Button Clicked'][key]+iphoneViewListing.values()['Application Opened'][key]);
           }
           graphOne.MPChart('setData', graphObj);
