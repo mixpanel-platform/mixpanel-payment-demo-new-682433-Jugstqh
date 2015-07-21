@@ -85,9 +85,8 @@
         /* Graph 1 build */
         $.when($iphoneViewProduct, $iphoneViewListing, $iphoneViewProductDay).done(function(iphoneViewProduct, iphoneViewListing, iphoneViewProductDay) {
           var graphObj = {};
-          for(day in iphoneViewProductDay.values()['Button Clicked']){
+          for(day in iphoneViewProduct.values()['Button Clicked']){
             console.log(day);
-            console.log(day>'2015-04-04');
           }
           graphObj['Daily Average'] = {};
           for(key in iphoneViewProduct.values()['Button Clicked']){
