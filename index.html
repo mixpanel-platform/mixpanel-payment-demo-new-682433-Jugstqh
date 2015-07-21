@@ -87,8 +87,10 @@
           var graphObj = {};
           var dayList = [];
           for(day in iphoneViewProduct.values()['Button Clicked']){
-            dayList.add(day);// DEBUGS, LEGT OFF HERE
+            dayList.push(day);// DEBUGS, LEGT OFF HERE
           }
+          dayList.sort();
+          console.log(dayList);
           graphObj['Daily Average'] = {};
           for(key in iphoneViewProduct.values()['Button Clicked']){
             graphObj['Daily Average'][key] = (iphoneViewProduct.values()['Button Clicked'][key]+iphoneViewListing.values()['Application Opened'][key]);
