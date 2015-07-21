@@ -83,7 +83,7 @@
           'where': 'properties["$os"] == "iPhone OS"'
         });
         /* Graph 1 build */
-        $.when($iphoneViewProduct, $iphoneViewListing, $iphoneViewProductDay).done(function(iphoneViewProduct, iphoneViewListing, iphoneViewProductDay) {
+        $.when($iphoneViewProduct, $iphoneViewListingDay, $iphoneViewProductDay).done(function(iphoneViewProduct, iphoneViewListingDay, iphoneViewProductDay) {
           var graphObj = {};
           var dayList = [];
           for(day in iphoneViewProduct.values()['Button Clicked']){
