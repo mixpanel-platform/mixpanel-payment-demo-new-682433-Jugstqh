@@ -98,21 +98,19 @@
           dayList.sort();
           //console.log(iphoneViewProductDay.values()['Button Clicked']);
           //console.log(iphoneViewListingDay.values()['Application Opened']);
-          var c = 0;
-          var cNext = 1;
+          var c = 1;
           var weeklySum = 0;
           for(var i = 0; i < dayList.length; i++){
             // Last week to analyze 
             console.log(dayList[i]);
             if(dayList[i] == weekList[c]){
+              graphObj['Daily Average'][weekList[c-1]] = weeklySum/7;
+              weeklySum = 0;
               c++;
-              
             }
             else {
-              
+              weeklySum += iPhoneViewProductDay.values()['Button Clicked'][i] + iPhoneViewListingDay.values()['Application Opened'][i];
             }
-            //graphObj['Daily Average'][key] = (iphoneViewProduct.values()['Button Clicked'][key]+iphoneViewListing.values()['Application Opened'][key]);
-            
           }
           graphOne.MPChart('setData', graphObj);
         });
