@@ -103,17 +103,15 @@
           for(var i = 0; i < dayList.length; i++){
             // Last week to analyze 
             if(dayList[i] == weekList[c]){
-              console.log("HIT WEEK");
-              console.log(weeklySum/7);
               graphObj['Daily Average'][weekList[c-1]] = weeklySum/7;
               weeklySum = 0;
               c++;
             }
             else {
               weeklySum += iphoneViewProductDay.values()['Button Clicked'][i] + iphoneViewListingDay.values()['Application Opened'][i];
+              console.log(weeklySum);
             }
           }
-          console.log(graphObj);
           graphOne.MPChart('setData', graphObj);
         });
         /* End of Graph 1 build */
