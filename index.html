@@ -53,7 +53,7 @@
       var runQuery = function() {
         
         /* Graph 1: Average mobile daily users per week TODO: change event names*/
-        // Query all unique users who viewed product in a week 
+        // Query weekly unique users who viewed product (mainly to get start of week dates) 
         var $iphoneViewProduct = MP.api.segment("Button Clicked", {
               from: startDate,
               to: moment(),
@@ -61,6 +61,7 @@
               type: 'unique',
               'where': 'properties["$os"] == "iPhone OS"'
         });
+        // Query all unique users who viewed product in a day (since start date)
         var $iphoneViewProductDay = MP.api.segment("Button Clicked", {
               from: startDate,
               to: moment(),
@@ -68,7 +69,7 @@
               type: 'unique',
               'where': 'properties["$os"] == "iPhone OS"'
         });
-        // Query all unique users who viewed listing 
+        // Query all unique users who viewed product in a day (since start date)
         var $iphoneViewListingDay = MP.api.segment("Application Opened", {
           from: startDate,
           to: moment(),
@@ -77,9 +78,12 @@
           'where': 'properties["$os"] == "iPhone OS"'
         });
         /* Graph 1 build */
+        // When above queries are done, run calculations and build graph
         $.when($iphoneViewProduct, $iphoneViewListingDay, $iphoneViewProductDay).done(function(iphoneViewProduct, iphoneViewListingDay, iphoneViewProductDay) {
+          // Create object for daily averages grouped per week
           var graphObj = {};
           graphObj['Daily Average'] = {};
+          // Create date lists - one list of every day, one list of every week
           var weekList = [];
           var dayList = [];
           for(week in iphoneViewProduct.values()['Button Clicked']){
@@ -88,49 +92,38 @@
           for(day in iphoneViewProductDay.values()['Button Clicked']) {
             dayList.push(day);
           }
+          // Sort lists from least current date to most current date
           weekList.sort();
           dayList.sort();
-          console.log(iphoneViewProductDay.values()['Button Clicked']);
-          console.log(iphoneViewListingDay.values()['Application Opened']);
-          var c = 1;
+          // - debug - console.log(iphoneViewProductDay.values()['Button Clicked']);
+          // - debug - console.log(iphoneViewListingDay.values()['Application Opened']);
+          // Initialize the start index for the week as one week ahead of the start day
+          var weekIndex = 1; 
           var weeklySum = 0;
+          // Go through each day (since start day) in order
           for(var i = 0; i < dayList.length; i++){
-            // Last week to analyze 
-            if(dayList[i] == weekList[c]){
-              graphObj['Daily Average'][weekList[c-1]] = weeklySum/7;
+            // If the day we're on equals the week ahead, we've summed up all unique counts for the week 
+            if(dayList[i] == weekList[weekIndex]){
+              // Take average (total sum of uniques per day over the week divided by 7) and add it to our graph object
+              // Notice we do this for weekIndex-1, this is because we're setting the average to the week we just went through, not the week we're starting (week index is always one week ahead of the one we're on)
+              graphObj['Daily Average'][weekList[weekIndex-1]] = weeklySum/7;
+              // Reset weekly sum and increment the week index 
               weeklySum = 0;
               c++;
             }
+            // If our day date doesn't equal the start of the next week, add to our weekly sum
             else {
               weeklySum += iphoneViewProductDay.values()['Button Clicked'][dayList[i]] + iphoneViewListingDay.values()['Application Opened'][dayList[i]];
             }
           }
+          // Graph our results (i.e. average daily unique users over a week)
           graphOne.MPChart('setData', graphObj);
         });
         /* End of Graph 1 build */
         
       };
     /* End query */
-    
-    /**
-    Function that builds a bar chart given event counts 
-    - "events" is structured like - [{"Event Name":{"Event Date": numberofEventsOnDate}, ... }, ...]
-    **/
-    function buildChartFromArray(events, chartElement) {
-      //console.log(events);
-      var barChartParams = {};
-      // For each event...
-      for(var i = 0; i < events.length; i++){
-        for(eventName in events[i]){
-          barChartParams[eventName] = 0;
-          for(date in events[i][eventName]){
-            barChartParams[eventName] += events[i][eventName][date];
-          }
-        }
-      }
-      chartElement.MPChart('setData', barChartParams);
-    }
-    
+
     </script>
   </body>
 </html>
