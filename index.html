@@ -12,12 +12,6 @@
         width:50%;
         float:left;
       }
-      .durationSumDiv{
-        font-size: 18px;
-        display: inline-block;
-        color: #545454;
-        font-weight: bold;
-      }
       .halfChart{
         width:50%;
         float:left;
@@ -59,7 +53,7 @@
       var runQuery = function() {
         
         /* Graph 1: Average mobile daily users per week TODO: change event names*/
-        // Query all unique users who viewed product in a week TODO: need to do this daily and sum for week
+        // Query all unique users who viewed product in a week 
         var $iphoneViewProduct = MP.api.segment("Button Clicked", {
               from: startDate,
               to: moment(),
