@@ -100,10 +100,12 @@
           //console.log(iphoneViewListingDay.values()['Application Opened']);
           var c = 0;
           var cNext = 1;
+          var weeklySum = 0;
           for(var i = 0; i < dayList.length; i++){
             // Last week to analyze 
             console.log(dayList[i]);
             if(dayList[i] == weekList[c]){
+              c++;
               
             }
             else {
