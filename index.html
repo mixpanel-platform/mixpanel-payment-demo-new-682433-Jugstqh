@@ -108,8 +108,7 @@
               c++;
             }
             else {
-              weeklySum += iphoneViewProductDay.values()['Button Clicked'][i] + iphoneViewListingDay.values()['Application Opened'][i];
-              console.log(iphoneViewProductDay.values()['Button Clicked'][i]);
+              weeklySum += iphoneViewProductDay.values()['Button Clicked'][dayList[i]] + iphoneViewListingDay.values()['Application Opened'][dayList[i]];
             }
           }
           graphOne.MPChart('setData', graphObj);
