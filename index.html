@@ -85,15 +85,19 @@
         /* Graph 1 build */
         $.when($iphoneViewProduct, $iphoneViewListingDay, $iphoneViewProductDay).done(function(iphoneViewProduct, iphoneViewListingDay, iphoneViewProductDay) {
           var graphObj = {};
+          graphObj['Daily Average'] = {};
           var weekList = [];
+          var dayList = [];
           for(week in iphoneViewProduct.values()['Button Clicked']){
             weekList.push(week);
           }
-          for(day in iphoneViewProductDay.values()[''])
+          for(day in iphoneViewProductDay.values()['Button Clicked']) {
+            dayList.push(day);
+          }
           weekList.sort();
-          graphObj['Daily Average'] = {};
-          console.log(iphoneViewProductDay.values()['Button Clicked']);
-          console.log(iphoneViewListingDay.values()['Application Opened']);
+          dayList.sort();
+          //console.log(iphoneViewProductDay.values()['Button Clicked']);
+          //console.log(iphoneViewListingDay.values()['Application Opened']);
           for(var i = 0; i < weekList.length; i++){
             // Last week to analyze 
             if(i == weekList.length-1){
