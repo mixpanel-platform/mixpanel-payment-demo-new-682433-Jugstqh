@@ -98,10 +98,12 @@
           dayList.sort();
           //console.log(iphoneViewProductDay.values()['Button Clicked']);
           //console.log(iphoneViewListingDay.values()['Application Opened']);
+          var c = 0;
+          var cNext = 1;
           for(var i = 0; i < dayList.length; i++){
             // Last week to analyze 
             console.log(dayList[i]);
-            if(i == weekList.length-1){
+            if(dayList[i] == weekList[c]){
               
             }
             else {
